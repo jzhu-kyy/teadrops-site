@@ -388,6 +388,127 @@
     .chip:hover:not(.active) { border-color: var(--peach); color: var(--peach); }
     .shop-grid { padding: 0 80px 64px; }
 
+    /* ─── Shop Opening Film ─── */
+    .shop-ad {
+      position: fixed; inset: 0; z-index: 180; overflow: hidden;
+      display: none; color: #F7F0E5; background: #172117;
+      isolation: isolate;
+    }
+    .shop-ad.playing { display: block; }
+    .shop-ad::after {
+      content: ''; position: absolute; inset: 18px; z-index: 8;
+      border: 1px solid rgba(247,240,229,.38); pointer-events: none;
+    }
+    .shop-ad-grid {
+      position: absolute; inset: 0; z-index: 7; pointer-events: none;
+      background-image:
+        linear-gradient(90deg, transparent calc(25% - .5px), rgba(247,240,229,.2) 25%, transparent calc(25% + .5px)),
+        linear-gradient(90deg, transparent calc(75% - .5px), rgba(247,240,229,.2) 75%, transparent calc(75% + .5px)),
+        linear-gradient(transparent calc(50% - .5px), rgba(247,240,229,.2) 50%, transparent calc(50% + .5px));
+    }
+    .shop-ad-brand {
+      position: absolute; top: 36px; left: 44px; z-index: 12;
+      font: 600 14px/1 'Cormorant Garamond', serif; letter-spacing: .32em;
+    }
+    .shop-ad-step {
+      position: absolute; top: 38px; right: 46px; z-index: 12;
+      font-size: 9px; letter-spacing: .22em; text-transform: uppercase;
+    }
+    .shop-ad-skip {
+      position: absolute; right: 45px; bottom: 36px; z-index: 14;
+      border: 1px solid rgba(247,240,229,.55); border-radius: 100px;
+      padding: 9px 15px; color: inherit; background: rgba(12,17,12,.28);
+      backdrop-filter: blur(8px); cursor: pointer; font: 500 10px/1 'DM Sans', sans-serif;
+      letter-spacing: .16em; text-transform: uppercase;
+    }
+    .shop-ad-scene { position: absolute; inset: 0; opacity: 0; }
+    .shop-ad-scene::after {
+      content: ''; position: absolute; inset: 0;
+      background: linear-gradient(90deg, rgba(8,14,9,.64) 0%, rgba(8,14,9,.1) 58%, rgba(8,14,9,.35) 100%);
+    }
+    .shop-ad-scene img { width: 100%; height: 100%; object-fit: cover; }
+    .shop-ad-scene-origin img { filter: saturate(.82) contrast(1.05) brightness(.78); }
+    .shop-ad-scene-blend { background: #E5A06C; }
+    .shop-ad-scene-blend::after {
+      background: linear-gradient(90deg, rgba(33,24,16,.52), transparent 46%, rgba(33,24,16,.12));
+    }
+    .shop-ad-scene-blend img { object-position: center; filter: saturate(.9) contrast(1.02); }
+    .shop-ad-scene-finish { background: #F0E5D6; color: #1A1612; }
+    .shop-ad-scene-finish::after { background: linear-gradient(90deg, #F0E5D6 0 44%, rgba(240,229,214,.05) 66%); }
+    .shop-ad-scene-finish img { width: 56%; margin-left: auto; object-position: center; }
+    .shop-ad-copy {
+      position: absolute; left: 7%; top: 51%; z-index: 11; width: min(520px, 70vw);
+      opacity: 0; transform: translateY(22px);
+    }
+    .shop-ad-copy small {
+      display: block; margin-bottom: 17px; font-size: 9px; letter-spacing: .24em;
+      text-transform: uppercase; color: #F2C3A4;
+    }
+    .shop-ad-copy strong {
+      display: block; font: 400 clamp(46px, 7vw, 98px)/.84 'Cormorant Garamond', serif;
+      letter-spacing: -.045em;
+    }
+    .shop-ad-copy p { margin-top: 22px; font-size: 11px; letter-spacing: .05em; }
+    .shop-ad-copy-final { color: #1A1612; top: 43%; }
+    .shop-ad-copy-final small { color: #B55830; }
+    .shop-ad-copy-final strong { font-size: clamp(52px, 7.5vw, 108px); }
+    .shop-ad-copy-final p { max-width: 330px; color: #6B5E50; line-height: 1.7; }
+    .shop-ad-peach {
+      position: absolute; z-index: 10; border-radius: 48% 52% 46% 54%;
+      background: radial-gradient(circle at 35% 30%, #FFD4A3 0 9%, #F18B55 42%, #C85130 76%);
+      box-shadow: inset -18px -20px 30px rgba(116,36,17,.2), 0 28px 55px rgba(41,18,8,.22);
+      opacity: 0;
+    }
+    .shop-ad-peach::before {
+      content: ''; position: absolute; width: 24%; height: 15%; left: 52%; top: -7%;
+      border-radius: 100% 0 100% 0; background: #496D3F; transform: rotate(-24deg);
+    }
+    .shop-ad-peach::after {
+      content: ''; position: absolute; inset: 11% 34% 12% 47%;
+      border-right: 1px solid rgba(122,41,22,.35); border-radius: 50%; transform: rotate(7deg);
+    }
+    .shop-ad-peach-one { width: 130px; height: 124px; right: 17%; top: 15%; }
+    .shop-ad-peach-two { width: 58px; height: 55px; right: 8%; bottom: 13%; }
+    .shop-ad-leaves { position: absolute; inset: 0; z-index: 10; pointer-events: none; }
+    .shop-ad-leaves span {
+      position: absolute; width: 34px; height: 12px; border-radius: 100% 0 100% 0;
+      background: linear-gradient(90deg,#223B22,#6B824C); opacity: 0;
+    }
+    .shop-ad-leaves span:nth-child(1) { left: 61%; top: 24%; transform: rotate(24deg); }
+    .shop-ad-leaves span:nth-child(2) { left: 70%; top: 63%; transform: rotate(-38deg) scale(.8); }
+    .shop-ad-leaves span:nth-child(3) { left: 82%; top: 40%; transform: rotate(58deg) scale(1.2); }
+    .shop-ad-leaves span:nth-child(4) { left: 54%; top: 75%; transform: rotate(-8deg) scale(.7); }
+    .shop-ad-progress {
+      position: absolute; left: 7%; bottom: 40px; z-index: 12; display: flex; gap: 7px;
+    }
+    .shop-ad-progress span { width: 42px; height: 1px; background: rgba(247,240,229,.3); overflow: hidden; }
+    .shop-ad-progress span::after { content: ''; display: block; width: 100%; height: 100%; background: #F7F0E5; transform: scaleX(0); transform-origin: left; }
+
+    .shop-ad.playing .shop-ad-scene-origin { animation: adSceneOne 7.2s both; }
+    .shop-ad.playing .shop-ad-scene-blend { animation: adSceneTwo 7.2s both; }
+    .shop-ad.playing .shop-ad-scene-finish { animation: adSceneThree 7.2s both; }
+    .shop-ad.playing .shop-ad-copy-pick { animation: adCopyOne 7.2s both; }
+    .shop-ad.playing .shop-ad-copy-blend { animation: adCopyTwo 7.2s both; }
+    .shop-ad.playing .shop-ad-copy-final { animation: adCopyThree 7.2s both; }
+    .shop-ad.playing .shop-ad-peach { animation: adPeach 7.2s cubic-bezier(.16,1,.3,1) both; }
+    .shop-ad.playing .shop-ad-leaves span { animation: adLeaf 7.2s cubic-bezier(.16,1,.3,1) both; }
+    .shop-ad.playing .shop-ad-leaves span:nth-child(2) { animation-delay: .08s; }
+    .shop-ad.playing .shop-ad-leaves span:nth-child(3) { animation-delay: .16s; }
+    .shop-ad.playing .shop-ad-leaves span:nth-child(4) { animation-delay: .24s; }
+    .shop-ad.playing .shop-ad-progress span:nth-child(1)::after { animation: adProgress 2.25s linear .15s both; }
+    .shop-ad.playing .shop-ad-progress span:nth-child(2)::after { animation: adProgress 2.25s linear 2.35s both; }
+    .shop-ad.playing .shop-ad-progress span:nth-child(3)::after { animation: adProgress 2.25s linear 4.55s both; }
+
+    @keyframes adSceneOne { 0%,30% { opacity:1; transform:scale(1.05); } 38%,100% { opacity:0; transform:scale(1.12); } }
+    @keyframes adSceneTwo { 0%,28% { opacity:0; transform:scale(1.08); } 36%,62% { opacity:1; transform:scale(1); } 70%,100% { opacity:0; transform:scale(1.05); } }
+    @keyframes adSceneThree { 0%,61% { opacity:0; } 70%,100% { opacity:1; } }
+    @keyframes adCopyOne { 0%,5% { opacity:0; transform:translateY(22px); } 11%,27% { opacity:1; transform:none; } 33%,100% { opacity:0; transform:translateY(-12px); } }
+    @keyframes adCopyTwo { 0%,34% { opacity:0; transform:translateY(22px); } 41%,58% { opacity:1; transform:none; } 64%,100% { opacity:0; transform:translateY(-12px); } }
+    @keyframes adCopyThree { 0%,68% { opacity:0; transform:translateY(22px); } 76%,100% { opacity:1; transform:none; } }
+    @keyframes adPeach { 0%,31% { opacity:0; transform:translate(35px,45px) rotate(12deg) scale(.75); } 40%,59% { opacity:1; transform:none; } 67%,100% { opacity:0; transform:translate(-10px,-16px) rotate(-5deg) scale(1.08); } }
+    @keyframes adLeaf { 0%,32% { opacity:0; translate:35px 44px; rotate:18deg; } 43%,59% { opacity:.92; translate:0 0; rotate:0deg; } 68%,100% { opacity:0; translate:-20px -30px; rotate:-24deg; } }
+    @keyframes adProgress { to { transform:scaleX(1); } }
+
     /* ─── Product Detail ─── */
     .breadcrumb {
       padding: 20px 80px 0; display: flex; align-items: center;
@@ -1305,6 +1426,19 @@
       .footer { padding: 24px 20px; }
       .detail-name { font-size: 32px; }
       .shop-title { font-size: 32px; }
+      .shop-ad::after { inset: 10px; }
+      .shop-ad-brand { top: 27px; left: 29px; }
+      .shop-ad-step { top: 29px; right: 29px; max-width: 45%; text-align: right; }
+      .shop-ad-copy { left: 10%; top: 55%; width: 78%; }
+      .shop-ad-copy strong { font-size: clamp(52px, 17vw, 78px); }
+      .shop-ad-copy-final { top: 38%; }
+      .shop-ad-copy-final strong { font-size: clamp(54px, 18vw, 82px); }
+      .shop-ad-scene-finish::after { background: linear-gradient(180deg, #F0E5D6 0 47%, rgba(240,229,214,.12) 75%); }
+      .shop-ad-scene-finish img { width: 100%; height: 54%; margin-top: auto; }
+      .shop-ad-peach-one { width: 92px; height: 88px; right: 11%; top: 18%; }
+      .shop-ad-peach-two { width: 48px; height: 46px; right: 8%; bottom: 18%; }
+      .shop-ad-progress { left: 10%; bottom: 32px; }
+      .shop-ad-skip { right: 27px; bottom: 26px; }
       .story-hero::after { inset: 12px; }
       .story-hero-content { padding: 126px 28px 56px; }
       .story-hero h1 { font-size: 54px; }
@@ -1345,6 +1479,9 @@
       .teahouse-room-bg { transform: none !important; transition: none !important; }
       .tea-door, .enter-teahouse { transition-duration: .01ms !important; }
       .tea-pot-button, .tea-pour-stream, .cup-tea-fill { animation: none !important; }
+      .shop-ad * { animation: none !important; }
+      .shop-ad .shop-ad-scene-finish, .shop-ad .shop-ad-copy-final { opacity: 1 !important; transform: none !important; }
+      .shop-ad .shop-ad-peach, .shop-ad .shop-ad-leaves { display: none !important; }
     }
   </style>
 </head>
@@ -1390,7 +1527,7 @@
         <h1 class="hero-title">Picked by hand.<em>Finished with peach.</em></h1>
         <p class="hero-desc">Mountain-grown black tea, handpicked in Thái Nguyên and folded with sun-dried peach. A small-batch cup with a bright stone-fruit finish and the story of its harvest still intact.</p>
         <div class="hero-actions">
-          <button class="btn btn-primary" onclick="showSection('detail')">
+          <button class="btn btn-primary" onclick="openProduct('peach-black-tea')">
             Taste the harvest
             <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
           </button>
@@ -1453,7 +1590,7 @@
           <div class="tea-intro-eyebrow">New harvest · Vietnam</div>
           <h3>Peach Black Tea</h3>
           <p>Mountain-grown black tea from Thái Nguyên, brightened with sun-dried peach and a soft honey finish.</p>
-          <button onclick="showSection('detail')">Shop now <span aria-hidden="true">→</span></button>
+          <button onclick="openProduct('peach-black-tea')">Shop now <span aria-hidden="true">→</span></button>
         </aside>
 
         <div class="tea-doors" aria-hidden="true">
@@ -1515,6 +1652,40 @@
 
   <!-- ═══ SHOP ═══ -->
   <section class="section" id="section-shop">
+    <div class="shop-ad" id="shopAd" aria-hidden="true">
+      <div class="shop-ad-scene shop-ad-scene-origin">
+        <img src="assets/tea-garden-oil-hero.png" alt="">
+      </div>
+      <div class="shop-ad-scene shop-ad-scene-blend">
+        <img src="assets/products/peach-black-tea.jpg" alt="">
+      </div>
+      <div class="shop-ad-scene shop-ad-scene-finish">
+        <img src="assets/products/peach-black-tea.jpg" alt="">
+      </div>
+      <div class="shop-ad-grid" aria-hidden="true"></div>
+      <div class="shop-ad-brand">TEADROPS</div>
+      <div class="shop-ad-step">Harvest No. 02 · Thái Nguyên</div>
+      <div class="shop-ad-copy shop-ad-copy-pick">
+        <small>Black tea · picked by hand</small>
+        <strong>We pick it.</strong>
+        <p>Mountain leaves, gathered while the morning is still cool.</p>
+      </div>
+      <div class="shop-ad-copy shop-ad-copy-blend">
+        <small>Tea leaf · sun-dried peach</small>
+        <strong>We blend it.</strong>
+        <p>Deep malt meets bright stone fruit.</p>
+      </div>
+      <div class="shop-ad-copy shop-ad-copy-final">
+        <small>New harvest · 200 tins</small>
+        <strong>Peach<br>Black Tea.</strong>
+        <p>From the mountains of Thái Nguyên to a cup made for slow afternoons.</p>
+      </div>
+      <div class="shop-ad-peach shop-ad-peach-one" aria-hidden="true"></div>
+      <div class="shop-ad-peach shop-ad-peach-two" aria-hidden="true"></div>
+      <div class="shop-ad-leaves" aria-hidden="true"><span></span><span></span><span></span><span></span></div>
+      <div class="shop-ad-progress" aria-hidden="true"><span></span><span></span><span></span></div>
+      <button class="shop-ad-skip" type="button" onclick="finishShopAd()">Skip film</button>
+    </div>
     <div class="shop-header">
       <h1 class="shop-title">Our Collection</h1>
       <p class="shop-subtitle">Curated single-origin teas sourced from the world's finest growing regions.</p>
@@ -1537,19 +1708,19 @@
     <div class="breadcrumb">
       <span onclick="showSection('shop')">Shop</span>
       <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><polyline points="9 18 15 12 9 6"/></svg>
-      <span onclick="showSection('shop')">Black Tea</span>
+      <span id="detailBreadcrumbCategory" onclick="showSection('shop')">Black Tea</span>
       <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><polyline points="9 18 15 12 9 6"/></svg>
-      <span class="current">Peach Black Tea</span>
+      <span class="current" id="detailBreadcrumbName">Peach Black Tea</span>
     </div>
 
     <div class="detail-layout">
       <div class="detail-img-wrap">
         <div class="detail-img">
-          <img src="assets/products/peach-black-tea.jpg" alt="Peach Black Tea ceramic jar with a spoonful of black tea and dried peach">
-          <div class="product-badge" style="position:absolute;top:20px;left:20px;">Limited Edition</div>
+          <img id="detailImage" src="assets/products/peach-black-tea.jpg" alt="Peach Black Tea ceramic jar with a spoonful of black tea and dried peach">
+          <div class="product-badge" id="detailBadge" style="position:absolute;top:20px;left:20px;">Limited Edition</div>
         </div>
         <div class="detail-thumbs">
-          <div class="detail-thumb active" style="background:url('assets/products/peach-black-tea.jpg') center/cover;"></div>
+          <div class="detail-thumb active" id="detailThumb" style="background:url('assets/products/peach-black-tea.jpg') center/cover;"></div>
           <div class="detail-thumb" style="background:var(--card);"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#8A7D6E" stroke-width="1.5"><circle cx="12" cy="12" r="10"/><path d="M8 14s1.5 2 4 2 4-2 4-2"/></svg></div>
           <div class="detail-thumb" style="background:var(--card);"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#8A7D6E" stroke-width="1.5"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg></div>
         </div>
@@ -1558,12 +1729,12 @@
       <div class="detail-info">
         <div class="detail-label">
           <div style="width:24px;height:1px;background:var(--peach);"></div>
-          <span style="font-size:11px;letter-spacing:2.5px;text-transform:uppercase;color:var(--peach);font-weight:600;">New Arrival</span>
+          <span id="detailLabel" style="font-size:11px;letter-spacing:2.5px;text-transform:uppercase;color:var(--peach);font-weight:600;">New Arrival</span>
         </div>
-        <h1 class="detail-name">Peach Black Tea</h1>
+        <h1 class="detail-name" id="detailName">Peach Black Tea</h1>
         <div class="detail-price-row">
-          <span class="detail-price">$24.00</span>
-          <span class="detail-unit">50g tin</span>
+          <span class="detail-price" id="detailPrice">$24.00</span>
+          <span class="detail-unit" id="detailUnit">50g tin</span>
         </div>
         <div class="rating">
           <div class="stars">
@@ -1573,24 +1744,24 @@
             <svg width="14" height="14" viewBox="0 0 24 24" fill="#E07B4C"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
             <svg width="14" height="14" viewBox="0 0 24 24" fill="#D4C8B8"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
           </div>
-          <span class="rating-text">4.8 (47 reviews)</span>
+          <span class="rating-text" id="detailRating">4.8 (47 reviews)</span>
         </div>
-        <p class="detail-desc">Black tea leaves handpicked from the Th&aacute;i Nguy&ecirc;n mountainous region in Vietnam, blended with sun-dried peach pieces. The result is a smooth, full-bodied cup with notes of ripe stone fruit, honey, and a gentle malty finish.</p>
+        <p class="detail-desc" id="detailDescription">Black tea leaves handpicked from the Th&aacute;i Nguy&ecirc;n mountainous region in Vietnam, blended with sun-dried peach pieces. The result is a smooth, full-bodied cup with notes of ripe stone fruit, honey, and a gentle malty finish.</p>
         <div class="tasting-label">Tasting Notes</div>
-        <div class="tasting-tags">
+        <div class="tasting-tags" id="detailTastingTags">
           <span class="tasting-tag">Stone Fruit</span>
           <span class="tasting-tag">Honey</span>
           <span class="tasting-tag">Malt</span>
           <span class="tasting-tag">Floral</span>
         </div>
         <div class="brew-specs">
-          <div class="brew-spec"><div class="brew-spec-label">Temp</div><div class="brew-spec-value">95&deg;C</div></div>
+          <div class="brew-spec"><div class="brew-spec-label">Temp</div><div class="brew-spec-value" id="detailTemp">95&deg;C</div></div>
           <div class="brew-divider"></div>
-          <div class="brew-spec"><div class="brew-spec-label">Time</div><div class="brew-spec-value">3-4 min</div></div>
+          <div class="brew-spec"><div class="brew-spec-label">Time</div><div class="brew-spec-value" id="detailTime">3-4 min</div></div>
           <div class="brew-divider"></div>
-          <div class="brew-spec"><div class="brew-spec-label">Amount</div><div class="brew-spec-value">2g / cup</div></div>
+          <div class="brew-spec"><div class="brew-spec-label">Amount</div><div class="brew-spec-value" id="detailAmount">2g / cup</div></div>
           <div class="brew-divider"></div>
-          <div class="brew-spec"><div class="brew-spec-label">Caffeine</div><div class="brew-spec-value">Medium</div></div>
+          <div class="brew-spec"><div class="brew-spec-label">Caffeine</div><div class="brew-spec-value" id="detailCaffeine">Medium</div></div>
         </div>
         <div class="qty-row">
           <div class="qty-control">
@@ -1598,7 +1769,7 @@
             <div class="qty-val" id="qtyVal">1</div>
             <button class="qty-btn" onclick="changeQty(1)">+</button>
           </div>
-          <button class="add-to-cart-btn" onclick="addToCart('peach-black-tea')">Add to Cart &mdash; $24.00</button>
+          <button class="add-to-cart-btn" onclick="addSelectedProductToCart()">Add to Cart &mdash; $24.00</button>
         </div>
         <div class="shipping-note">
           <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><path d="M12 22s-8-4.5-8-11.8A8 8 0 0112 2a8 8 0 018 8.2c0 7.3-8 11.8-8 11.8z"/><circle cx="12" cy="10" r="3"/></svg>
@@ -1618,8 +1789,8 @@
       </div>
       <div class="origin-content">
         <div class="origin-label">The Story Behind This Tea</div>
-        <h3 class="origin-title">From the Th&aacute;i Nguy&ecirc;n Mountains</h3>
-        <p class="origin-text">Nestled in the misty highlands of northern Vietnam, the Nguy&#7877;n family has cultivated tea for five generations. Their black tea leaves are hand-rolled and sun-withered using methods passed down through the decades, then paired with peach pieces dried on stone slabs at the farm's edge.</p>
+        <h3 class="origin-title" id="detailOriginTitle">From the Th&aacute;i Nguy&ecirc;n Mountains</h3>
+        <p class="origin-text" id="detailOriginText">Nestled in the misty highlands of northern Vietnam, the Nguy&#7877;n family has cultivated tea for five generations. Their black tea leaves are hand-rolled and sun-withered using methods passed down through the decades, then paired with peach pieces dried on stone slabs at the farm's edge.</p>
       </div>
     </div>
 
@@ -1627,7 +1798,7 @@
       <h2 class="bundles-title">Complete Your Tea Ritual</h2>
       <p class="bundles-subtitle">Bundle and save, or add the perfect companion pieces.</p>
       <div class="bundles-grid">
-        <div class="bundle-card featured">
+        <div class="bundle-card featured" id="peachBundleCard">
           <div class="bundle-badge">Best Value</div>
           <div class="bundle-name">Peach Tea Discovery Set</div>
           <p class="bundle-desc">Peach Black Tea tin + ceramic cup + bamboo scoop. Everything to start your ritual.</p>
@@ -1737,12 +1908,60 @@
   <script>
     // ─── Product Data ───
     const products = [
-      { id: 'peach-black-tea', name: 'Peach Black Tea', category: 'black', origin: 'Vietnam · Thái Nguyên', price: 24, image: 'assets/products/peach-black-tea.jpg', badge: 'New', featured: true },
-      { id: 'jasmine-dragon', name: 'Jasmine Dragon Pearl', category: 'green', origin: 'China · Fujian', price: 22, image: 'assets/products/jasmine-dragon.jpg' },
-      { id: 'roasted-oolong', name: 'Roasted Oolong', category: 'oolong', origin: 'Taiwan · Nantou', price: 28, image: 'assets/products/roasted-oolong.jpg' },
-      { id: 'golden-yunnan', name: 'Golden Yunnan', category: 'black', origin: 'China · Yunnan', price: 26, image: 'assets/products/golden-yunnan.jpg' },
-      { id: 'silver-needle', name: 'Silver Needle White', category: 'white', origin: 'China · Fujian', price: 32, image: 'assets/products/silver-needle.jpg' },
-      { id: 'kyoto-matcha', name: 'Kyoto Matcha', category: 'green', origin: 'Japan · Uji', price: 34, image: 'assets/products/kyoto-matcha.jpg' },
+      {
+        id: 'peach-black-tea', name: 'Peach Black Tea', category: 'black', origin: 'Vietnam · Thái Nguyên', price: 24,
+        image: 'assets/products/peach-black-tea.jpg', badge: 'New', detailBadge: 'Limited Edition', label: 'New Arrival', featured: true,
+        rating: '4.8 (47 reviews)', unit: '50g tin', notes: ['Stone Fruit', 'Honey', 'Malt', 'Floral'],
+        temp: '95°C', time: '3–4 min', amount: '2g / cup', caffeine: 'Medium',
+        description: 'Black tea leaves handpicked from the Thái Nguyên mountainous region in Vietnam, blended with sun-dried peach pieces. The result is a smooth, full-bodied cup with notes of ripe stone fruit, honey, and a gentle malty finish.',
+        originTitle: 'From the Thái Nguyên Mountains',
+        originText: 'Nestled in the misty highlands of northern Vietnam, the Nguyễn family has cultivated tea for five generations. Their black tea leaves are hand-rolled and sun-withered, then paired with peach pieces dried on stone slabs at the farm’s edge.'
+      },
+      {
+        id: 'jasmine-dragon', name: 'Jasmine Dragon Pearl', category: 'green', origin: 'China · Fujian', price: 22,
+        image: 'assets/products/jasmine-dragon.jpg', detailBadge: 'Hand Rolled', label: 'Scented Green Tea',
+        rating: '4.9 (63 reviews)', unit: '50g tin', notes: ['Jasmine', 'Sweet Pea', 'Fresh', 'Silky'],
+        temp: '80°C', time: '2–3 min', amount: '2g / cup', caffeine: 'Low',
+        description: 'Tender Fujian green tea is hand-rolled into pearls, then rested with fresh jasmine blossoms over several evenings. Each pearl opens slowly in the cup, releasing a clean floral aroma and a soft, sweet finish.',
+        originTitle: 'Scented Through Fujian Nights',
+        originText: 'The tea is gathered in spring and held until jasmine blooms in summer. Growers layer blossom and leaf by hand overnight, removing each flower before morning so fragrance remains without masking the tea.'
+      },
+      {
+        id: 'roasted-oolong', name: 'Roasted Oolong', category: 'oolong', origin: 'Taiwan · Nantou', price: 28,
+        image: 'assets/products/roasted-oolong.jpg', detailBadge: 'Small Batch', label: 'Charcoal Roasted',
+        rating: '4.7 (38 reviews)', unit: '50g tin', notes: ['Toasted Grain', 'Cacao', 'Orchid', 'Mineral'],
+        temp: '92°C', time: '3–4 min', amount: '2g / cup', caffeine: 'Medium',
+        description: 'High-mountain oolong from Nantou receives a patient charcoal roast that deepens its floral character into toasted grain, cacao, and a clean mineral finish. The rolled leaves are made for several infusions.',
+        originTitle: 'A Slow Roast in Nantou',
+        originText: 'After rolling, the leaves rest between gentle roasting sessions so heat reaches the center without flattening their aroma. The maker judges each batch by scent rather than a timer.'
+      },
+      {
+        id: 'golden-yunnan', name: 'Golden Yunnan', category: 'black', origin: 'China · Yunnan', price: 26,
+        image: 'assets/products/golden-yunnan.jpg', detailBadge: 'Single Origin', label: 'Golden Tip Black Tea',
+        rating: '4.8 (51 reviews)', unit: '50g tin', notes: ['Cocoa', 'Sweet Potato', 'Malt', 'Caramel'],
+        temp: '95°C', time: '3–4 min', amount: '2g / cup', caffeine: 'Medium',
+        description: 'Golden tea buds from Yunnan produce a rounded black tea with cocoa depth, caramel sweetness, and almost no bitterness. It is rich enough for morning, but smooth enough to drink without milk.',
+        originTitle: 'Golden Buds from Yunnan',
+        originText: 'At high elevation, cool nights slow the growth of each bud. The leaves are carefully oxidized in small lots, bringing forward their honeyed aroma and signature copper-gold color.'
+      },
+      {
+        id: 'silver-needle', name: 'Silver Needle White', category: 'white', origin: 'China · Fujian', price: 32,
+        image: 'assets/products/silver-needle.jpg', detailBadge: 'First Flush', label: 'White Tea',
+        rating: '4.9 (29 reviews)', unit: '40g tin', notes: ['Melon', 'Hay', 'Cucumber', 'Soft Honey'],
+        temp: '78°C', time: '4–5 min', amount: '2g / cup', caffeine: 'Low',
+        description: 'Only down-covered spring buds are selected for this delicate Fujian white tea. Minimal handling preserves a quiet cup of melon, fresh hay, cucumber, and a lingering soft sweetness.',
+        originTitle: 'The First Buds of Spring',
+        originText: 'Silver Needle is picked during a narrow early-spring window, before the buds open into leaves. The harvest is simply withered and dried, keeping the season’s lightest flavors intact.'
+      },
+      {
+        id: 'kyoto-matcha', name: 'Kyoto Matcha', category: 'green', origin: 'Japan · Uji', price: 34,
+        image: 'assets/products/kyoto-matcha.jpg', detailBadge: 'Stone Ground', label: 'Ceremonial Matcha',
+        rating: '4.9 (72 reviews)', unit: '30g tin', notes: ['Umami', 'Young Greens', 'Cream', 'Sea Breeze'],
+        temp: '75°C', time: 'Whisk 20 sec', amount: '1.5g / bowl', caffeine: 'High',
+        description: 'Shade-grown tencha from Uji is stone-ground into a vivid matcha with deep umami, fresh green aroma, and a creamy finish. Fine texture helps it whisk into a smooth, lasting foam.',
+        originTitle: 'Shade Grown in Uji',
+        originText: 'Tea gardens are covered before harvest to concentrate chlorophyll and amino acids. After steaming and drying, the leaf is slowly ground between granite stones to protect its color and aroma.'
+      }
     ];
 
     const addons = [
@@ -1754,7 +1973,10 @@
     const allItems = [...products, ...addons];
     let cart = [];
     let detailQty = 1;
+    let selectedProductId = 'peach-black-tea';
     let pourTimer;
+    let shopAdTimer;
+    const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
     // ─── Card Rendering ───
     function teaIcon() {
@@ -1766,7 +1988,7 @@
     function catLabel(c) { return { black:'Black Tea', green:'Green Tea', oolong:'Oolong', white:'White Tea', herbal:'Herbal' }[c] || c; }
 
     function renderCard(p) {
-      return `<div class="product-card" onclick="showSection('detail')">
+      return `<div class="product-card" onclick="openProduct('${p.id}')">
         <div class="product-card-img">
           <img src="${p.image}" alt="${p.name} ceramic tea jar and a ceramic spoonful of tea" loading="lazy">
           ${p.badge ? `<div class="product-badge">${p.badge}</div>` : ''}
@@ -1804,6 +2026,59 @@
       document.querySelectorAll('.chip').forEach((chip) => {
         chip.classList.toggle('active', chip.getAttribute('onclick').includes(`'${cat}'`));
       });
+    }
+
+    function updateProductDetail(product) {
+      selectedProductId = product.id;
+      detailQty = 1;
+      document.getElementById('qtyVal').textContent = '1';
+      document.getElementById('detailBreadcrumbCategory').textContent = catLabel(product.category);
+      document.getElementById('detailBreadcrumbName').textContent = product.name;
+      document.getElementById('detailImage').src = product.image;
+      document.getElementById('detailImage').alt = `${product.name} ceramic tea jar with a spoonful of tea`;
+      document.getElementById('detailThumb').style.backgroundImage = `url('${product.image}')`;
+      document.getElementById('detailBadge').textContent = product.detailBadge;
+      document.getElementById('detailLabel').textContent = product.label;
+      document.getElementById('detailName').textContent = product.name;
+      document.getElementById('detailPrice').textContent = `$${product.price.toFixed(2)}`;
+      document.getElementById('detailUnit').textContent = product.unit;
+      document.getElementById('detailRating').textContent = product.rating;
+      document.getElementById('detailDescription').textContent = product.description;
+      document.getElementById('detailTastingTags').innerHTML = product.notes.map(note => `<span class="tasting-tag">${note}</span>`).join('');
+      document.getElementById('detailTemp').textContent = product.temp;
+      document.getElementById('detailTime').textContent = product.time;
+      document.getElementById('detailAmount').textContent = product.amount;
+      document.getElementById('detailCaffeine').textContent = product.caffeine;
+      document.getElementById('detailOriginTitle').textContent = product.originTitle;
+      document.getElementById('detailOriginText').textContent = product.originText;
+      document.querySelector('.add-to-cart-btn').textContent = `Add to Cart — $${product.price.toFixed(2)}`;
+      document.getElementById('peachBundleCard').style.display = product.id === 'peach-black-tea' ? '' : 'none';
+    }
+
+    function openProduct(id) {
+      const product = products.find(item => item.id === id);
+      if (!product) return;
+      updateProductDetail(product);
+      showSection('detail', { hash: `product/${id}` });
+    }
+
+    function playShopAd() {
+      const ad = document.getElementById('shopAd');
+      clearTimeout(shopAdTimer);
+      ad.classList.remove('playing');
+      void ad.offsetWidth;
+      ad.classList.add('playing');
+      ad.setAttribute('aria-hidden', 'false');
+      document.body.style.overflow = 'hidden';
+      shopAdTimer = setTimeout(finishShopAd, reducedMotion ? 1400 : 7300);
+    }
+
+    function finishShopAd() {
+      clearTimeout(shopAdTimer);
+      const ad = document.getElementById('shopAd');
+      ad.classList.remove('playing');
+      ad.setAttribute('aria-hidden', 'true');
+      document.body.style.overflow = '';
     }
 
     function openPopUp() {
@@ -1844,6 +2119,7 @@
 
     // ─── Navigation ───
     function showSection(name, options = {}) {
+      if (name !== 'shop') finishShopAd();
       resetTeaPour();
       document.getElementById('teahouseRoom').classList.remove('entered');
       document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
@@ -1853,7 +2129,9 @@
       const map = { home: 0, shop: 1, detail: 1, story: 2 };
       if (map[name] !== undefined) document.querySelectorAll('.nav-link')[map[name]].classList.add('active');
       if (name === 'cart') renderCart();
-      if (window.location.hash !== '#' + name) history.replaceState(null, '', '#' + name);
+      if (name === 'shop' && !options.skipShopAd) playShopAd();
+      const nextHash = options.hash || name;
+      if (window.location.hash !== '#' + nextHash) history.replaceState(null, '', '#' + nextHash);
       if (!options.preserveScroll) window.scrollTo({ top: 0, behavior: 'smooth' });
       requestAnimationFrame(updateNavSurface);
     }
@@ -1866,14 +2144,19 @@
     function changeQty(d) {
       detailQty = Math.max(1, detailQty + d);
       document.getElementById('qtyVal').textContent = detailQty;
-      document.querySelector('.add-to-cart-btn').textContent = `Add to Cart — $${(24 * detailQty).toFixed(2)}`;
+      const product = products.find(item => item.id === selectedProductId);
+      document.querySelector('.add-to-cart-btn').textContent = `Add to Cart — $${(product.price * detailQty).toFixed(2)}`;
+    }
+
+    function addSelectedProductToCart() {
+      addToCart(selectedProductId, detailQty);
     }
 
     // ─── Cart ───
-    function addToCart(id) {
+    function addToCart(id, quantity = 1) {
       const existing = cart.find(i => i.id === id);
-      if (existing) { existing.qty++; }
-      else { cart.push({ id, qty: 1 }); }
+      if (existing) { existing.qty += quantity; }
+      else { cart.push({ id, qty: quantity }); }
       updateCartBadge();
       const badge = document.getElementById('cartBadge');
       badge.style.transform = 'scale(1.3)';
@@ -1981,9 +2264,12 @@
     // ─── Init ───
     populateFeatured();
     populateShop('all');
+    updateProductDetail(products[0]);
     renderCart();
     const initialSection = window.location.hash.slice(1);
-    if (initialSection === 'pop-up') {
+    if (initialSection.startsWith('product/')) {
+      openProduct(initialSection.slice('product/'.length));
+    } else if (initialSection === 'pop-up') {
       showSection('home', { preserveScroll: true });
       requestAnimationFrame(() => {
         document.getElementById('pop-up').scrollIntoView({ block: 'start' });
@@ -2000,7 +2286,6 @@
     // ─── Homepage painted parallax ───
     const hero = document.querySelector('.hero');
     const finePointer = window.matchMedia('(pointer: fine)').matches;
-    const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
     if (hero && finePointer && !reducedMotion) {
       hero.addEventListener('pointermove', (event) => {
         const bounds = hero.getBoundingClientRect();

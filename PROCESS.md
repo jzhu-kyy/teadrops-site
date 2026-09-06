@@ -9,10 +9,13 @@ The hero uses slow camera movement and isolated micro-movements around the three
 ## User flow
 
 1. Discover the new Peach Black Tea and its origin.
-2. Browse the wider tea collection and filter by tea type.
-3. Explore product details, tasting notes, brewing guidance, and provenance.
-4. Select a bundle or add-on.
-5. Review quantities and totals in the cart.
+2. Enter the shop through a short editorial film that moves from handpicking to blending tea leaf with peach, then hands off directly to the collection.
+3. Browse the wider tea collection and filter by tea type.
+4. Open a product-specific detail page with its own imagery, tasting notes, brewing guidance, and provenance.
+5. Select a bundle or add-on.
+6. Review quantities and totals in the cart.
+
+The shop film was rebuilt as a lightweight HTML/CSS sequence rather than an embedded video. It borrows the reference recording's editorial grid, full-frame imagery, paced statements, and final product reveal while using Teadrops' own tea-garden and Peach Black Tea assets. A visible skip control and a shortened reduced-motion version keep the sequence optional and accessible.
 
 ## Generative AI disclosure
 
