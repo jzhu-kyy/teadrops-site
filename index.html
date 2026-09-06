@@ -657,6 +657,122 @@
     }
     .empty-cart-text { font-size: 15px; color: var(--text-muted); margin-bottom: 32px; }
 
+    /* ─── Our Story ─── */
+    .story-page { background: #F2EBE0; color: var(--text); }
+    .story-hero {
+      min-height: 68svh;
+      position: relative;
+      display: flex;
+      align-items: flex-end;
+      overflow: hidden;
+      background: url("assets/tea-garden-oil-hero.png") center 48% / cover no-repeat;
+    }
+    .story-hero::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background:
+        linear-gradient(90deg, rgba(10, 18, 12, .76), rgba(10, 18, 12, .18) 68%),
+        linear-gradient(180deg, rgba(10, 18, 12, .1) 35%, rgba(10, 18, 12, .78));
+    }
+    .story-hero::after {
+      content: "";
+      position: absolute;
+      inset: 28px;
+      border: 1px solid rgba(242, 235, 224, .28);
+    }
+    .story-hero-content {
+      position: relative;
+      z-index: 2;
+      max-width: 920px;
+      padding: 116px 8vw 72px;
+      color: var(--cream);
+    }
+    .story-eyebrow {
+      margin-bottom: 18px;
+      color: #F3B18D;
+      font-size: 10px;
+      font-weight: 600;
+      letter-spacing: .22em;
+      text-transform: uppercase;
+    }
+    .story-hero h1 {
+      max-width: 780px;
+      margin: 0 0 22px;
+      font: 300 clamp(58px, 7vw, 104px)/.88 'Cormorant Garamond', serif;
+      letter-spacing: -.045em;
+    }
+    .story-hero p {
+      max-width: 590px;
+      color: rgba(242, 235, 224, .78);
+      font-size: 15px;
+      line-height: 1.7;
+    }
+    .story-body { max-width: 1320px; margin: 0 auto; padding: 88px 6vw 100px; }
+    .story-lede {
+      display: grid;
+      grid-template-columns: .7fr 1.3fr;
+      gap: 64px;
+      padding-top: 28px;
+      border-top: 1px solid var(--border);
+    }
+    .story-lede-label {
+      color: var(--peach-dark);
+      font-size: 10px;
+      font-weight: 600;
+      letter-spacing: .2em;
+      text-transform: uppercase;
+    }
+    .story-lede h2 {
+      margin: 0 0 20px;
+      font: 400 clamp(38px, 4vw, 60px)/.98 'Cormorant Garamond', serif;
+      letter-spacing: -.035em;
+    }
+    .story-lede p { max-width: 760px; color: #5F554B; font-size: 16px; line-height: 1.85; }
+    .story-chapters {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1px;
+      margin-top: 78px;
+      background: var(--border);
+      border: 1px solid var(--border);
+    }
+    .story-chapter { min-height: 290px; padding: 34px; background: #EDE4D7; }
+    .story-chapter span {
+      display: block;
+      color: var(--peach-dark);
+      font-size: 10px;
+      font-weight: 600;
+      letter-spacing: .18em;
+      text-transform: uppercase;
+    }
+    .story-chapter h3 {
+      margin: 46px 0 14px;
+      font: 500 29px/1 'Cormorant Garamond', serif;
+    }
+    .story-chapter p { color: #6B5E50; font-size: 14px; line-height: 1.7; }
+    .story-manifesto {
+      margin-top: 78px;
+      padding: 58px 6vw;
+      display: grid;
+      grid-template-columns: .55fr 1.45fr;
+      gap: 50px;
+      color: var(--cream);
+      background: var(--dark);
+      border-radius: 28px;
+    }
+    .story-manifesto span {
+      color: #F3B18D;
+      font-size: 10px;
+      font-weight: 600;
+      letter-spacing: .2em;
+      text-transform: uppercase;
+    }
+    .story-manifesto blockquote {
+      margin: 0;
+      font: 400 clamp(30px, 3.4vw, 48px)/1.08 'Cormorant Garamond', serif;
+    }
+
     /* ─── Footer ─── */
     .footer {
       background: var(--dark); padding: 48px 80px; margin-top: 40px;
@@ -699,7 +815,9 @@
       .order-summary-wrap { flex: 1; }
       .footer { padding: 32px; flex-wrap: wrap; }
       .breadcrumb { padding-left: 32px; padding-right: 32px; }
-    }
+      .story-lede, .story-manifesto { grid-template-columns: 1fr; gap: 24px; }
+      .story-chapters { grid-template-columns: 1fr; }
+      }
     @media (max-width: 640px) {
       .nav-links .nav-link { display: none; }
       .nav-divider { display: none; }
@@ -725,6 +843,13 @@
       .footer { padding: 24px 20px; }
       .detail-name { font-size: 32px; }
       .shop-title { font-size: 32px; }
+      .story-hero::after { inset: 12px; }
+      .story-hero-content { padding: 126px 28px 56px; }
+      .story-hero h1 { font-size: 54px; }
+      .story-body { padding: 58px 20px 72px; }
+      .story-lede { gap: 20px; }
+      .story-chapters, .story-manifesto { margin-top: 48px; }
+      .story-chapter { min-height: 235px; }
     }
     @media (prefers-reduced-motion: reduce) {
       *, *::before, *::after { scroll-behavior: auto !important; }
@@ -741,7 +866,7 @@
     <div class="nav-links">
       <button class="nav-link active" onclick="showSection('home')">Home</button>
       <button class="nav-link" onclick="showSection('shop')">Shop</button>
-      <button class="nav-link" onclick="showSection('detail')">Our Story</button>
+      <button class="nav-link" onclick="showSection('story')">Our Story</button>
       <button class="nav-link" onclick="showSection('detail')">Pop-Up</button>
       <div class="nav-divider"></div>
       <button class="nav-cart" onclick="showSection('cart')">
@@ -779,7 +904,7 @@
             Taste the harvest
             <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
           </button>
-          <button class="btn btn-outline" onclick="showSection('detail')">Meet the makers</button>
+          <button class="btn btn-outline" onclick="showSection('story')">Meet the makers</button>
         </div>
       </div>
       <div class="harvest-note">
@@ -797,6 +922,50 @@
         </button>
       </div>
       <div class="products-grid" id="featuredGrid"></div>
+    </div>
+  </section>
+
+  <!-- ═══ OUR STORY ═══ -->
+  <section class="section story-page" id="section-story">
+    <div class="story-hero">
+      <div class="story-hero-content">
+        <div class="story-eyebrow">Our Story · Source before flavor</div>
+        <h1>Tea is never just a tasting note.</h1>
+        <p>Every blend begins with a landscape, a season, and the hands that understand both. Teadrops exists to keep those origins visible from the field to the final cup.</p>
+      </div>
+    </div>
+
+    <div class="story-body">
+      <div class="story-lede">
+        <div class="story-lede-label">Where the rows begin</div>
+        <div>
+          <h2>Thái Nguyên, told through its harvest.</h2>
+          <p>In northern Vietnam, mountain air and carefully tended tea rows shape leaves with a deep, malty character. Our Peach Black Tea begins there: leaves are picked by hand, processed in small batches, and paired with dried peach only after the tea has developed its own voice. We share the place and process behind each ingredient because provenance should be part of the experience—not fine print beneath it.</p>
+        </div>
+      </div>
+
+      <div class="story-chapters">
+        <article class="story-chapter">
+          <span>01 · Place</span>
+          <h3>Picked where it grows</h3>
+          <p>We begin with the conditions that shape a tea: elevation, climate, harvest timing, and the knowledge of the people working among the rows.</p>
+        </article>
+        <article class="story-chapter">
+          <span>02 · Process</span>
+          <h3>Made visible</h3>
+          <p>From handpicking and withering to rolling and drying, we explain the decisions that create a tea's flavor instead of reducing it to a label.</p>
+        </article>
+        <article class="story-chapter">
+          <span>03 · Blend</span>
+          <h3>Peach, with restraint</h3>
+          <p>Dried peach adds brightness without covering the black tea beneath it. The blend is designed to reveal its origin, not disguise it.</p>
+        </article>
+      </div>
+
+      <div class="story-manifesto">
+        <span>Our promise</span>
+        <blockquote>Keep the grower in the story, the process in view, and the origin present in every cup.</blockquote>
+      </div>
     </div>
   </section>
 
@@ -1014,7 +1183,7 @@
     </div>
     <div>
       <div class="footer-col-title">About</div>
-      <span class="footer-link">Our Story</span>
+      <span class="footer-link" onclick="showSection('story')">Our Story</span>
       <span class="footer-link">Tea Sourcing</span>
       <span class="footer-link">Pop-Up Events</span>
       <span class="footer-link">Contact</span>
@@ -1096,9 +1265,10 @@
       document.getElementById('section-' + name).classList.add('active');
       document.getElementById('siteNav').classList.toggle('is-home', name === 'home');
       document.querySelectorAll('.nav-link').forEach(l => l.classList.remove('active'));
-      const map = { home: 0, shop: 1, detail: 2 };
+      const map = { home: 0, shop: 1, detail: 1, story: 2 };
       if (map[name] !== undefined) document.querySelectorAll('.nav-link')[map[name]].classList.add('active');
       if (name === 'cart') renderCart();
+      if (window.location.hash !== '#' + name) history.replaceState(null, '', '#' + name);
       window.scrollTo({ top: 0, behavior: 'smooth' });
     }
 
@@ -1222,6 +1392,10 @@
     populateFeatured();
     populateShop('all');
     renderCart();
+    const initialSection = window.location.hash.slice(1);
+    if (['home', 'shop', 'story', 'detail', 'cart'].includes(initialSection)) {
+      showSection(initialSection);
+    }
 
     // ─── Homepage painted parallax ───
     const hero = document.querySelector('.hero');
