@@ -16,6 +16,6 @@ The hero uses slow camera movement and isolated micro-movements around the three
 
 ## Generative AI disclosure
 
-Generative AI was used to transform a user-provided Vietnamese tea-garden reference image into the oil-painted homepage hero asset, to create and refine the matching illustrated tea-house interior used in the immersive pop-up section, and to assist with front-end implementation and iteration. The information hierarchy, interaction flow, visual selection, copy editing, and final design decisions were reviewed and directed by the designer.
+Generative AI was used to transform a user-provided Vietnamese tea-garden reference image into the oil-painted homepage hero asset, to create and refine the matching illustrated tea-house interior, to produce the six ceramic-jar product illustrations used across the shop, and to assist with front-end implementation and iteration. The information hierarchy, interaction flow, visual selection, copy editing, and final design decisions were reviewed and directed by the designer.
 
 The original reference image is retained locally for process documentation but excluded from the public repository. Before production use, all photographic source material should be replaced with a fully licensed or client-owned asset.
