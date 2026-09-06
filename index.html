@@ -667,7 +667,7 @@
       padding: 72px 5vw 88px;
       scroll-margin-top: 78px;
       color: var(--cream);
-      background: #111914;
+      background: #183427;
     }
     .teahouse-section-head {
       max-width: 1500px;
@@ -714,7 +714,7 @@
       position: absolute;
       inset: -18px;
       z-index: -3;
-      background: url("assets/tea-house-pop-up.png") center center / cover no-repeat;
+      background: url("assets/tea-house-pop-up-v2.png") center center / cover no-repeat;
       transform: translate3d(calc(var(--room-x) * -9px), calc(var(--room-y) * -6px), 0) scale(1.035);
       transition: transform 1.2s cubic-bezier(.16, 1, .3, 1);
     }
@@ -725,8 +725,8 @@
       z-index: -1;
       pointer-events: none;
       background:
-        linear-gradient(180deg, rgba(16, 17, 11, .28), transparent 34%, rgba(16, 17, 11, .24)),
-        linear-gradient(90deg, rgba(12, 17, 12, .18), transparent 38% 72%, rgba(12, 17, 12, .16));
+        linear-gradient(180deg, rgba(16, 38, 24, .06), transparent 38%, rgba(16, 35, 23, .08)),
+        linear-gradient(90deg, rgba(16, 37, 24, .05), transparent 38% 72%, rgba(16, 37, 24, .04));
     }
     .room-guide {
       position: absolute;
@@ -755,14 +755,19 @@
     }
     .shelf-title {
       position: absolute;
-      left: 4.2%;
-      top: 18%;
+      left: 5.2%;
+      top: 25%;
       z-index: 4;
-      color: rgba(242, 235, 224, .76);
+      padding: 8px 11px;
+      color: #314937;
+      background: rgba(255, 249, 232, .82);
+      border: 1px solid rgba(88, 108, 75, .28);
+      border-radius: 100px;
+      backdrop-filter: blur(8px);
       font-size: 9px;
-      letter-spacing: .18em;
+      font-weight: 700;
+      letter-spacing: .13em;
       text-transform: uppercase;
-      writing-mode: vertical-rl;
     }
     .tea-hotspot {
       position: absolute;
@@ -781,21 +786,23 @@
     .tea-hotspot::before { content: "+"; font-size: 14px; line-height: 1; }
     .tea-hotspot span {
       position: absolute;
-      left: 36px;
-      top: 50%;
+      left: 50%;
+      top: 37px;
       width: max-content;
       padding: 7px 10px;
-      transform: translateY(-50%) translateX(-5px);
+      transform: translateX(-50%);
       color: #1A2119;
-      background: rgba(242, 235, 224, .9);
+      background: rgba(255, 250, 235, .94);
+      border: 1px solid rgba(75, 92, 63, .2);
       border-radius: 100px;
       font-size: 9px;
       font-weight: 600;
       letter-spacing: .08em;
       text-transform: uppercase;
-      opacity: 0;
+      opacity: 1;
       pointer-events: none;
-      transition: opacity .2s ease, transform .2s ease;
+      box-shadow: 0 5px 14px rgba(64, 46, 26, .12);
+      transition: transform .2s ease, background .2s ease;
     }
     .tea-hotspot:hover,
     .tea-hotspot:focus-visible {
@@ -805,11 +812,11 @@
       outline: none;
     }
     .tea-hotspot:hover span,
-    .tea-hotspot:focus-visible span { opacity: 1; transform: translateY(-50%) translateX(0); }
-    .hotspot-black { left: 10.8%; top: 29%; }
-    .hotspot-green { left: 18.2%; top: 29%; }
-    .hotspot-oolong { left: 25.2%; top: 29%; }
-    .hotspot-white { left: 11.2%; top: 45%; }
+    .tea-hotspot:focus-visible span { transform: translateX(-50%) translateY(2px); background: #FFFDF4; }
+    .hotspot-black { left: 10.2%; top: 42.5%; }
+    .hotspot-green { left: 17%; top: 42.5%; }
+    .hotspot-oolong { left: 24.4%; top: 42.5%; }
+    .hotspot-white { left: 31.8%; top: 42.5%; }
 
     .taste-sign {
       position: absolute;
@@ -876,7 +883,7 @@
       width: 50.5%;
       background:
         linear-gradient(90deg, rgba(255,255,255,.025), transparent 16% 84%, rgba(0,0,0,.16)),
-        repeating-linear-gradient(90deg, #17271E 0 72px, #1E3326 72px 76px);
+        repeating-linear-gradient(90deg, #244B38 0 72px, #2F6047 72px 76px);
       box-shadow: inset 0 0 90px rgba(0, 0, 0, .42);
       transition: transform 1.05s cubic-bezier(.76, 0, .24, 1);
     }
@@ -1128,11 +1135,11 @@
       .teahouse-room-bg { background-position: 40% center; }
       .room-guide { top: 14px; left: 14px; }
       .shelf-title { display: none; }
-      .tea-hotspot span { opacity: 1; transform: translateY(-50%); }
-      .hotspot-black { left: 12%; top: 29%; }
-      .hotspot-green { left: 12%; top: 38%; }
-      .hotspot-oolong { left: 12%; top: 47%; }
-      .hotspot-white { left: 12%; top: 56%; }
+      .tea-hotspot span { transform: translateX(-50%); }
+      .hotspot-black { left: 13%; top: 41%; }
+      .hotspot-green { left: 28%; top: 41%; }
+      .hotspot-oolong { left: 43%; top: 41%; }
+      .hotspot-white { left: 58%; top: 41%; }
       .taste-sign { left: 57%; top: 65%; width: 168px; }
       .tea-steam { left: 42%; top: 55%; }
       .enter-teahouse { width: 176px; height: 176px; }
@@ -1226,7 +1233,7 @@
       <div class="teahouse-room" id="teahouseRoom">
         <div class="teahouse-room-bg" aria-hidden="true"></div>
         <div class="room-guide"><i></i> Explore the shelf · Visit the center table</div>
-        <div class="shelf-title">The tea shelf · Choose a jar</div>
+        <div class="shelf-title">Tea shelf · choose a jar</div>
 
         <button class="tea-hotspot hotspot-black" onclick="browseTea('black')" aria-label="Browse black teas"><span>Black tea</span></button>
         <button class="tea-hotspot hotspot-green" onclick="browseTea('green')" aria-label="Browse green teas"><span>Green tea</span></button>
@@ -1611,6 +1618,7 @@
 
     // ─── Navigation ───
     function showSection(name, options = {}) {
+      document.getElementById('teahouseRoom').classList.remove('entered');
       document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
       document.getElementById('section-' + name).classList.add('active');
       document.getElementById('siteNav').classList.toggle('is-home', name === 'home');
