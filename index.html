@@ -651,7 +651,7 @@
       transition: transform 0.2s;
     }
     .mini-card:hover { transform: translateX(4px); }
-    .mini-card-img { width: 56px; height: 56px; border-radius: 12px; flex-shrink: 0; }
+    .mini-card-img { width: 56px; height: 56px; border-radius: 12px; flex-shrink: 0; object-fit: cover; }
     .mini-card-info { flex: 1; min-width: 0; }
     .mini-card-name {
       font-family: 'Cormorant Garamond', serif; font-size: 15px; font-weight: 600;
@@ -720,7 +720,7 @@
       position: absolute;
       inset: -18px;
       z-index: -3;
-      background: url("assets/tea-house-pop-up-v2.png") center center / cover no-repeat;
+      background: url("assets/tea-house-pour-bg.jpg") center center / cover no-repeat;
       transform: translate3d(calc(var(--room-x) * -9px), calc(var(--room-y) * -6px), 0) scale(1.035);
       transition: transform 1.2s cubic-bezier(.16, 1, .3, 1);
     }
@@ -843,13 +843,171 @@
       border: 1px solid rgba(239, 198, 145, .56);
       border-radius: 4px;
       box-shadow: inset 0 0 28px rgba(15, 9, 5, .42), 0 12px 28px rgba(0, 0, 0, .2);
-      transition: transform .28s ease, background .28s ease;
+      transition: transform .35s ease, opacity .35s ease, background .28s ease;
     }
     .taste-sign small { font-size: 7px; letter-spacing: .18em; text-transform: uppercase; color: #F3B18D; }
     .taste-sign strong { margin: 3px 0 2px; font: 500 23px/1 'Cormorant Garamond', serif; }
     .taste-sign span { font-size: 8px; letter-spacing: .08em; }
-    .taste-sign:hover,
-    .taste-sign:focus-visible { transform: translate(-50%, -50%) scale(1.045); background: rgba(79, 44, 22, .94); outline: none; }
+    .teahouse-room.pouring .taste-sign,
+    .teahouse-room.poured .taste-sign {
+      opacity: 0;
+      transform: translate(-50%, -50%) scale(.92);
+      pointer-events: none;
+    }
+
+    .tea-pot-button {
+      position: absolute;
+      left: 41.2%;
+      top: 68.2%;
+      z-index: 6;
+      width: clamp(150px, 15.5%, 232px);
+      padding: 0;
+      border: 0;
+      background: transparent;
+      transform: translate(-50%, -50%);
+      transform-origin: 46% 48%;
+      cursor: pointer;
+      filter: drop-shadow(0 12px 10px rgba(94, 56, 24, .2));
+      transition: transform .3s ease, filter .3s ease;
+    }
+    .tea-pot-button img { width: 100%; pointer-events: none; }
+    .tea-pot-button::after {
+      content: "Click to pour";
+      position: absolute;
+      left: 50%;
+      bottom: -5px;
+      width: max-content;
+      padding: 7px 11px;
+      color: #FCF6E9;
+      background: rgba(27, 63, 44, .82);
+      border: 1px solid rgba(255, 250, 235, .62);
+      border-radius: 100px;
+      transform: translateX(-50%);
+      font-size: 8px;
+      font-weight: 700;
+      letter-spacing: .12em;
+      text-transform: uppercase;
+      box-shadow: 0 6px 16px rgba(38, 29, 15, .18);
+    }
+    .tea-pot-button:hover,
+    .tea-pot-button:focus-visible {
+      transform: translate(-50%, -54%) scale(1.035);
+      filter: drop-shadow(0 16px 13px rgba(94, 56, 24, .28));
+      outline: none;
+    }
+    .teahouse-room.pouring .tea-pot-button {
+      pointer-events: none;
+      animation: liftAndPour 3.2s cubic-bezier(.45, 0, .2, 1) both;
+    }
+    .teahouse-room.pouring .tea-pot-button::after,
+    .teahouse-room.poured .tea-pot-button::after { opacity: 0; }
+
+    .tea-cup-sprite {
+      position: absolute;
+      left: 50.8%;
+      top: 72.5%;
+      z-index: 6;
+      width: clamp(70px, 7.5%, 112px);
+      transform: translate(-50%, -50%);
+      filter: drop-shadow(0 8px 7px rgba(94, 56, 24, .2));
+      pointer-events: none;
+    }
+    .tea-cup-sprite img { position: relative; z-index: 1; width: 100%; }
+    .cup-tea-fill {
+      position: absolute;
+      left: 28%;
+      top: 26%;
+      z-index: 2;
+      width: 45%;
+      height: 15%;
+      border-radius: 50%;
+      background: radial-gradient(ellipse at 45% 35%, #D68548 0 16%, #A94F27 66%, #7D371E 100%);
+      box-shadow: inset 0 2px 4px rgba(255, 221, 164, .55);
+      opacity: 0;
+      transform: scale(.25);
+    }
+    .teahouse-room.pouring .cup-tea-fill {
+      animation: fillCup 1.15s ease-out 1.45s forwards;
+    }
+    .teahouse-room.poured .cup-tea-fill { opacity: 1; transform: scale(1); }
+
+    .tea-pour-stream {
+      position: absolute;
+      left: 50.2%;
+      top: 60.5%;
+      z-index: 7;
+      width: 5px;
+      height: 12.5%;
+      border-radius: 100%;
+      background: linear-gradient(90deg, #8C3E21, #D77B3D 48%, #7E321A);
+      box-shadow: 0 0 8px rgba(239, 166, 91, .45);
+      opacity: 0;
+      transform: rotate(3deg) scaleY(0);
+      transform-origin: top;
+      pointer-events: none;
+    }
+    .teahouse-room.pouring .tea-pour-stream {
+      animation: pourStream 1.35s ease-in-out 1.05s both;
+    }
+
+    .tea-intro-card {
+      position: absolute;
+      right: 3.2%;
+      top: 27%;
+      z-index: 8;
+      width: min(300px, 26%);
+      padding: 22px;
+      color: #21372A;
+      background: rgba(255, 251, 238, .94);
+      border: 1px solid rgba(73, 102, 72, .28);
+      border-radius: 20px;
+      box-shadow: 0 22px 55px rgba(62, 47, 22, .24);
+      backdrop-filter: blur(14px);
+      opacity: 0;
+      transform: translateY(16px) scale(.96);
+      pointer-events: none;
+      transition: opacity .48s ease, transform .48s cubic-bezier(.16, 1, .3, 1);
+    }
+    .teahouse-room.poured .tea-intro-card {
+      opacity: 1;
+      transform: translateY(0) scale(1);
+      pointer-events: auto;
+    }
+    .tea-intro-eyebrow {
+      color: #C96642;
+      font-size: 9px;
+      font-weight: 700;
+      letter-spacing: .18em;
+      text-transform: uppercase;
+    }
+    .tea-intro-card h3 {
+      margin: 7px 0 7px;
+      font: 600 28px/1 'Cormorant Garamond', serif;
+    }
+    .tea-intro-card p {
+      margin: 0 0 15px;
+      color: #657064;
+      font-size: 11px;
+      line-height: 1.55;
+    }
+    .tea-intro-card button {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 10px 16px;
+      color: #FFF8EA;
+      background: #C96642;
+      border: 0;
+      border-radius: 100px;
+      font-family: inherit;
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: .08em;
+      text-transform: uppercase;
+      cursor: pointer;
+      transition: transform .2s ease, background .2s ease;
+    }
+    .tea-intro-card button:hover { transform: translateY(-2px); background: #A94E30; }
 
     .tea-steam {
       position: absolute;
@@ -938,6 +1096,20 @@
       0% { transform: translate3d(0, 20px, 0) scale(.7); opacity: 0; }
       24% { opacity: .58; }
       100% { transform: translate3d(8px, -38px, 0) scale(1.25); opacity: 0; }
+    }
+    @keyframes liftAndPour {
+      0%, 100% { transform: translate(-50%, -50%) rotate(0); }
+      18% { transform: translate(-50%, -78%) rotate(0); }
+      38%, 70% { transform: translate(-20%, -94%) rotate(24deg); }
+      88% { transform: translate(-50%, -76%) rotate(0); }
+    }
+    @keyframes pourStream {
+      0%, 100% { opacity: 0; transform: rotate(3deg) scaleY(0); }
+      15%, 82% { opacity: .92; transform: rotate(3deg) scaleY(1); }
+    }
+    @keyframes fillCup {
+      0% { opacity: 0; transform: scale(.25); }
+      100% { opacity: 1; transform: scale(1); }
     }
 
     /* ─── Our Story ─── */
@@ -1102,6 +1274,12 @@
       .story-chapters { grid-template-columns: 1fr; }
       .teahouse-room { min-height: 650px; }
       }
+    @media (max-width: 900px) and (min-width: 641px) {
+      .tea-hotspot span { padding: 6px 7px; font-size: 7px; }
+      .hotspot-green span, .hotspot-white span { top: -30px; }
+      .tea-intro-card { right: 3%; width: 230px; padding: 18px; }
+      .tea-intro-card h3 { font-size: 25px; }
+    }
     @media (max-width: 640px) {
       .nav-links .nav-link { display: none; }
       .nav-divider { display: none; }
@@ -1141,13 +1319,21 @@
       .teahouse-room-bg { background-position: 40% center; }
       .room-guide { top: 14px; left: 14px; }
       .shelf-title { display: none; }
-      .tea-hotspot span { transform: translateX(-50%); }
+      .tea-hotspot span { top: 37px; transform: translateX(-50%); }
       .hotspot-black { left: 13%; top: 41%; }
       .hotspot-green { left: 28%; top: 41%; }
       .hotspot-oolong { left: 43%; top: 41%; }
       .hotspot-white { left: 58%; top: 41%; }
       .taste-sign { left: 57%; top: 65%; width: 168px; }
-      .tea-steam { left: 42%; top: 55%; }
+      .tea-steam { left: 31%; top: 54%; }
+      .tea-pot-button { left: 34%; top: 69%; width: 155px; }
+      .tea-cup-sprite { left: 58%; top: 74%; width: 78px; }
+      .tea-pour-stream { left: 55%; top: 61%; height: 13%; }
+      .tea-intro-card {
+        left: 14px; right: 14px; top: auto; bottom: 14px;
+        width: auto; padding: 17px;
+      }
+      .tea-intro-card h3 { font-size: 24px; }
       .enter-teahouse { width: 176px; height: 176px; }
       .enter-teahouse strong { font-size: 25px; }
     }
@@ -1158,6 +1344,7 @@
       .tea-steam span, .room-guide i { animation: none !important; }
       .teahouse-room-bg { transform: none !important; transition: none !important; }
       .tea-door, .enter-teahouse { transition-duration: .01ms !important; }
+      .tea-pot-button, .tea-pour-stream, .cup-tea-fill { animation: none !important; }
     }
   </style>
 </head>
@@ -1247,11 +1434,27 @@
         <button class="tea-hotspot hotspot-white" onclick="browseTea('white')" aria-label="Browse white teas"><span>White tea</span></button>
 
         <div class="tea-steam" aria-hidden="true"><span></span><span></span><span></span></div>
-        <button class="taste-sign" onclick="showSection('detail')">
-          <small>At the center table</small>
-          <strong>Welcome—taste it</strong>
-          <span>Peach Black Tea →</span>
+        <button class="tea-pot-button" onclick="pourTea()" aria-label="Lift the teapot and pour Peach Black Tea">
+          <img src="assets/tea-pot-sprite.png" alt="Painted ceramic teapot">
         </button>
+        <div class="tea-cup-sprite" aria-hidden="true">
+          <img src="assets/tea-cup-sprite.png" alt="">
+          <span class="cup-tea-fill"></span>
+        </div>
+        <div class="tea-pour-stream" aria-hidden="true"></div>
+
+        <div class="taste-sign">
+          <small>A small tasting ritual</small>
+          <strong>Click the teapot</strong>
+          <span>Pour the newest harvest</span>
+        </div>
+
+        <aside class="tea-intro-card" aria-live="polite">
+          <div class="tea-intro-eyebrow">New harvest · Vietnam</div>
+          <h3>Peach Black Tea</h3>
+          <p>Mountain-grown black tea from Thái Nguyên, brightened with sun-dried peach and a soft honey finish.</p>
+          <button onclick="showSection('detail')">Shop now <span aria-hidden="true">→</span></button>
+        </aside>
 
         <div class="tea-doors" aria-hidden="true">
           <div class="tea-door tea-door-left"></div>
@@ -1551,6 +1754,7 @@
     const allItems = [...products, ...addons];
     let cart = [];
     let detailQty = 1;
+    let pourTimer;
 
     // ─── Card Rendering ───
     function teaIcon() {
@@ -1613,11 +1817,34 @@
     }
 
     function enterTeaHouse() {
+      resetTeaPour();
       document.getElementById('teahouseRoom').classList.add('entered');
+    }
+
+    function resetTeaPour() {
+      clearTimeout(pourTimer);
+      document.getElementById('teahouseRoom').classList.remove('pouring', 'poured');
+    }
+
+    function pourTea() {
+      const room = document.getElementById('teahouseRoom');
+      if (!room.classList.contains('entered')) return;
+      resetTeaPour();
+      if (reducedMotion) {
+        room.classList.add('poured');
+        return;
+      }
+      void room.offsetWidth;
+      room.classList.add('pouring');
+      pourTimer = setTimeout(() => {
+        room.classList.remove('pouring');
+        room.classList.add('poured');
+      }, 3200);
     }
 
     // ─── Navigation ───
     function showSection(name, options = {}) {
+      resetTeaPour();
       document.getElementById('teahouseRoom').classList.remove('entered');
       document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
       document.getElementById('section-' + name).classList.add('active');
@@ -1741,7 +1968,7 @@
       const recs = products.filter(p => !inCart.has(p.id)).slice(0, 2);
       document.getElementById('cartRecs').innerHTML = recs.map(p =>
         `<div class="mini-card" onclick="addToCart('${p.id}');renderCart();">
-          <div class="mini-card-img" style="background:${p.gradient};"></div>
+          <img class="mini-card-img" src="${p.image}" alt="${p.name}">
           <div class="mini-card-info">
             <div class="mini-card-name">${p.name}</div>
             <div class="mini-card-price">$${p.price.toFixed(2)}</div>
@@ -1756,11 +1983,10 @@
     populateShop('all');
     renderCart();
     const initialSection = window.location.hash.slice(1);
-    if (initialSection === 'pop-up' || initialSection === 'pop-up-open') {
+    if (initialSection === 'pop-up') {
       showSection('home', { preserveScroll: true });
       requestAnimationFrame(() => {
         document.getElementById('pop-up').scrollIntoView({ block: 'start' });
-        if (initialSection === 'pop-up-open') enterTeaHouse();
         document.querySelectorAll('.nav-link').forEach(l => l.classList.remove('active'));
         document.querySelectorAll('.nav-link')[3].classList.add('active');
         history.replaceState(null, '', '#' + initialSection);
