@@ -52,6 +52,11 @@
       backdrop-filter: none;
       border-color: transparent;
     }
+    .nav.is-home.scrolled {
+      background: rgba(26, 22, 18, 0.94);
+      backdrop-filter: blur(14px);
+      border-color: rgba(242, 235, 224, 0.08);
+    }
     .section:not(#section-home) { padding-top: 78px; }
     .nav-logo {
       font-family: 'Cormorant Garamond', serif; font-size: 24px;
@@ -657,6 +662,271 @@
     }
     .empty-cart-text { font-size: 15px; color: var(--text-muted); margin-bottom: 32px; }
 
+    /* ─── Immersive Pop-Up Tea House ─── */
+    .teahouse-section {
+      padding: 72px 5vw 88px;
+      scroll-margin-top: 78px;
+      color: var(--cream);
+      background: #111914;
+    }
+    .teahouse-section-head {
+      max-width: 1500px;
+      margin: 0 auto 28px;
+      display: flex;
+      justify-content: space-between;
+      align-items: end;
+      gap: 28px;
+    }
+    .teahouse-kicker {
+      margin-bottom: 10px;
+      color: #F3B18D;
+      font-size: 10px;
+      font-weight: 600;
+      letter-spacing: .22em;
+      text-transform: uppercase;
+    }
+    .teahouse-section-head h2 {
+      margin: 0;
+      font: 400 clamp(42px, 5vw, 72px)/.92 'Cormorant Garamond', serif;
+      letter-spacing: -.04em;
+    }
+    .teahouse-section-head p {
+      max-width: 410px;
+      margin: 0 0 4px;
+      color: rgba(242, 235, 224, .62);
+      font-size: 13px;
+      line-height: 1.7;
+    }
+    .teahouse-room {
+      --room-x: 0;
+      --room-y: 0;
+      width: min(1500px, 100%);
+      min-height: min(78svh, 860px);
+      margin: 0 auto;
+      position: relative;
+      overflow: hidden;
+      isolation: isolate;
+      border: 1px solid rgba(242, 235, 224, .22);
+      background: #2C2116;
+      box-shadow: 0 35px 90px rgba(0, 0, 0, .36);
+    }
+    .teahouse-room-bg {
+      position: absolute;
+      inset: -18px;
+      z-index: -3;
+      background: url("assets/tea-house-pop-up.png") center center / cover no-repeat;
+      transform: translate3d(calc(var(--room-x) * -9px), calc(var(--room-y) * -6px), 0) scale(1.035);
+      transition: transform 1.2s cubic-bezier(.16, 1, .3, 1);
+    }
+    .teahouse-room::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      z-index: -1;
+      pointer-events: none;
+      background:
+        linear-gradient(180deg, rgba(16, 17, 11, .28), transparent 34%, rgba(16, 17, 11, .24)),
+        linear-gradient(90deg, rgba(12, 17, 12, .18), transparent 38% 72%, rgba(12, 17, 12, .16));
+    }
+    .room-guide {
+      position: absolute;
+      top: 22px;
+      left: 24px;
+      z-index: 4;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      padding: 9px 13px;
+      color: rgba(242, 235, 224, .82);
+      background: rgba(18, 25, 17, .46);
+      border: 1px solid rgba(242, 235, 224, .28);
+      backdrop-filter: blur(10px);
+      font-size: 9px;
+      letter-spacing: .13em;
+      text-transform: uppercase;
+    }
+    .room-guide i {
+      width: 7px;
+      height: 7px;
+      border-radius: 50%;
+      background: #F3B18D;
+      box-shadow: 0 0 0 5px rgba(243, 177, 141, .15);
+      animation: guidePulse 2.2s ease-in-out infinite;
+    }
+    .shelf-title {
+      position: absolute;
+      left: 4.2%;
+      top: 18%;
+      z-index: 4;
+      color: rgba(242, 235, 224, .76);
+      font-size: 9px;
+      letter-spacing: .18em;
+      text-transform: uppercase;
+      writing-mode: vertical-rl;
+    }
+    .tea-hotspot {
+      position: absolute;
+      z-index: 5;
+      width: 25px;
+      height: 25px;
+      padding: 0;
+      border: 1px solid rgba(242, 235, 224, .86);
+      border-radius: 50%;
+      color: var(--cream);
+      background: rgba(24, 33, 22, .4);
+      box-shadow: 0 0 0 8px rgba(242, 235, 224, .1);
+      backdrop-filter: blur(7px);
+      transition: transform .25s ease, background .25s ease, box-shadow .25s ease;
+    }
+    .tea-hotspot::before { content: "+"; font-size: 14px; line-height: 1; }
+    .tea-hotspot span {
+      position: absolute;
+      left: 36px;
+      top: 50%;
+      width: max-content;
+      padding: 7px 10px;
+      transform: translateY(-50%) translateX(-5px);
+      color: #1A2119;
+      background: rgba(242, 235, 224, .9);
+      border-radius: 100px;
+      font-size: 9px;
+      font-weight: 600;
+      letter-spacing: .08em;
+      text-transform: uppercase;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity .2s ease, transform .2s ease;
+    }
+    .tea-hotspot:hover,
+    .tea-hotspot:focus-visible {
+      transform: scale(1.12);
+      background: var(--peach);
+      box-shadow: 0 0 0 11px rgba(239, 143, 107, .18);
+      outline: none;
+    }
+    .tea-hotspot:hover span,
+    .tea-hotspot:focus-visible span { opacity: 1; transform: translateY(-50%) translateX(0); }
+    .hotspot-black { left: 10.8%; top: 29%; }
+    .hotspot-green { left: 18.2%; top: 29%; }
+    .hotspot-oolong { left: 25.2%; top: 29%; }
+    .hotspot-white { left: 11.2%; top: 45%; }
+
+    .taste-sign {
+      position: absolute;
+      left: 60.2%;
+      top: 62.2%;
+      z-index: 5;
+      width: 218px;
+      min-height: 88px;
+      padding: 14px 18px;
+      transform: translate(-50%, -50%);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      color: #EFE4D2;
+      text-align: center;
+      background: rgba(58, 34, 18, .86);
+      border: 1px solid rgba(239, 198, 145, .56);
+      border-radius: 4px;
+      box-shadow: inset 0 0 28px rgba(15, 9, 5, .42), 0 12px 28px rgba(0, 0, 0, .2);
+      transition: transform .28s ease, background .28s ease;
+    }
+    .taste-sign small { font-size: 7px; letter-spacing: .18em; text-transform: uppercase; color: #F3B18D; }
+    .taste-sign strong { margin: 3px 0 2px; font: 500 23px/1 'Cormorant Garamond', serif; }
+    .taste-sign span { font-size: 8px; letter-spacing: .08em; }
+    .taste-sign:hover,
+    .taste-sign:focus-visible { transform: translate(-50%, -50%) scale(1.045); background: rgba(79, 44, 22, .94); outline: none; }
+
+    .tea-steam {
+      position: absolute;
+      left: 43.6%;
+      top: 54%;
+      z-index: 3;
+      width: 80px;
+      height: 100px;
+      pointer-events: none;
+    }
+    .tea-steam span {
+      position: absolute;
+      bottom: 0;
+      width: 20px;
+      height: 70px;
+      border-left: 2px solid rgba(242, 235, 224, .42);
+      border-radius: 50%;
+      filter: blur(.4px);
+      opacity: 0;
+      animation: steamRise 4.2s ease-in-out infinite;
+    }
+    .tea-steam span:nth-child(2) { left: 19px; animation-delay: 1.3s; }
+    .tea-steam span:nth-child(3) { left: 38px; animation-delay: 2.6s; }
+
+    .tea-doors {
+      position: absolute;
+      inset: 0;
+      z-index: 12;
+      overflow: hidden;
+      pointer-events: auto;
+      transition: visibility 0s linear .95s;
+    }
+    .tea-door {
+      position: absolute;
+      top: 0;
+      bottom: 0;
+      width: 50.5%;
+      background:
+        linear-gradient(90deg, rgba(255,255,255,.025), transparent 16% 84%, rgba(0,0,0,.16)),
+        repeating-linear-gradient(90deg, #17271E 0 72px, #1E3326 72px 76px);
+      box-shadow: inset 0 0 90px rgba(0, 0, 0, .42);
+      transition: transform 1.05s cubic-bezier(.76, 0, .24, 1);
+    }
+    .tea-door::before {
+      content: "";
+      position: absolute;
+      inset: 8%;
+      border: 1px solid rgba(211, 178, 126, .23);
+    }
+    .tea-door-left { left: 0; border-right: 1px solid rgba(227, 196, 145, .35); }
+    .tea-door-right { right: 0; border-left: 1px solid rgba(227, 196, 145, .35); }
+    .enter-teahouse {
+      position: absolute;
+      left: 50%;
+      top: 50%;
+      z-index: 14;
+      width: 218px;
+      height: 218px;
+      transform: translate(-50%, -50%);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      border: 1px solid rgba(242, 235, 224, .42);
+      border-radius: 50%;
+      color: var(--cream);
+      background: rgba(13, 22, 16, .46);
+      backdrop-filter: blur(12px);
+      box-shadow: 0 0 0 18px rgba(242, 235, 224, .045);
+      transition: opacity .45s ease, transform .45s ease;
+    }
+    .enter-teahouse small { font-size: 8px; letter-spacing: .2em; text-transform: uppercase; color: #F3B18D; }
+    .enter-teahouse strong { margin: 9px 0 5px; font: 400 31px/1 'Cormorant Garamond', serif; }
+    .enter-teahouse span { font-size: 9px; letter-spacing: .08em; opacity: .68; }
+    .enter-teahouse:hover { transform: translate(-50%, -50%) scale(1.04); }
+    .teahouse-room.entered .tea-door-left { transform: translateX(-101%); }
+    .teahouse-room.entered .tea-door-right { transform: translateX(101%); }
+    .teahouse-room.entered .enter-teahouse { opacity: 0; transform: translate(-50%, -50%) scale(.88); pointer-events: none; }
+    .teahouse-room.entered .tea-doors { visibility: hidden; pointer-events: none; }
+
+    @keyframes guidePulse {
+      0%, 100% { transform: scale(.82); opacity: .55; }
+      50% { transform: scale(1.12); opacity: 1; }
+    }
+    @keyframes steamRise {
+      0% { transform: translate3d(0, 20px, 0) scale(.7); opacity: 0; }
+      24% { opacity: .58; }
+      100% { transform: translate3d(8px, -38px, 0) scale(1.25); opacity: 0; }
+    }
+
     /* ─── Our Story ─── */
     .story-page { background: #F2EBE0; color: var(--text); }
     .story-hero {
@@ -817,6 +1087,7 @@
       .breadcrumb { padding-left: 32px; padding-right: 32px; }
       .story-lede, .story-manifesto { grid-template-columns: 1fr; gap: 24px; }
       .story-chapters { grid-template-columns: 1fr; }
+      .teahouse-room { min-height: 650px; }
       }
     @media (max-width: 640px) {
       .nav-links .nav-link { display: none; }
@@ -850,11 +1121,30 @@
       .story-lede { gap: 20px; }
       .story-chapters, .story-manifesto { margin-top: 48px; }
       .story-chapter { min-height: 235px; }
+      .teahouse-section { padding: 54px 12px 68px; }
+      .teahouse-section-head { padding: 0 10px; align-items: start; flex-direction: column; }
+      .teahouse-section-head h2 { font-size: 48px; }
+      .teahouse-room { min-height: 650px; }
+      .teahouse-room-bg { background-position: 40% center; }
+      .room-guide { top: 14px; left: 14px; }
+      .shelf-title { display: none; }
+      .tea-hotspot span { opacity: 1; transform: translateY(-50%); }
+      .hotspot-black { left: 12%; top: 29%; }
+      .hotspot-green { left: 12%; top: 38%; }
+      .hotspot-oolong { left: 12%; top: 47%; }
+      .hotspot-white { left: 12%; top: 56%; }
+      .taste-sign { left: 57%; top: 65%; width: 168px; }
+      .tea-steam { left: 42%; top: 55%; }
+      .enter-teahouse { width: 176px; height: 176px; }
+      .enter-teahouse strong { font-size: 25px; }
     }
     @media (prefers-reduced-motion: reduce) {
       *, *::before, *::after { scroll-behavior: auto !important; }
       .hero-image, .harvester-motion, .hero-scroll::after { animation: none !important; }
       .hero-media { transform: none !important; transition: none !important; }
+      .tea-steam span, .room-guide i { animation: none !important; }
+      .teahouse-room-bg { transform: none !important; transition: none !important; }
+      .tea-door, .enter-teahouse { transition-duration: .01ms !important; }
     }
   </style>
 </head>
@@ -867,7 +1157,7 @@
       <button class="nav-link active" onclick="showSection('home')">Home</button>
       <button class="nav-link" onclick="showSection('shop')">Shop</button>
       <button class="nav-link" onclick="showSection('story')">Our Story</button>
-      <button class="nav-link" onclick="showSection('detail')">Pop-Up</button>
+      <button class="nav-link" onclick="openPopUp()">Pop-Up</button>
       <div class="nav-divider"></div>
       <button class="nav-cart" onclick="showSection('cart')">
         <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
@@ -923,6 +1213,44 @@
       </div>
       <div class="products-grid" id="featuredGrid"></div>
     </div>
+
+    <section class="teahouse-section" id="pop-up">
+      <div class="teahouse-section-head">
+        <div>
+          <div class="teahouse-kicker">The Teadrops Pop-Up · Los Angeles</div>
+          <h2>A tea house you can enter.</h2>
+        </div>
+        <p>Move through the room, meet the teas on our shelf, and taste the newest harvest at the table in the center.</p>
+      </div>
+
+      <div class="teahouse-room" id="teahouseRoom">
+        <div class="teahouse-room-bg" aria-hidden="true"></div>
+        <div class="room-guide"><i></i> Explore the shelf · Visit the center table</div>
+        <div class="shelf-title">The tea shelf · Choose a jar</div>
+
+        <button class="tea-hotspot hotspot-black" onclick="browseTea('black')" aria-label="Browse black teas"><span>Black tea</span></button>
+        <button class="tea-hotspot hotspot-green" onclick="browseTea('green')" aria-label="Browse green teas"><span>Green tea</span></button>
+        <button class="tea-hotspot hotspot-oolong" onclick="browseTea('oolong')" aria-label="Browse oolong teas"><span>Oolong</span></button>
+        <button class="tea-hotspot hotspot-white" onclick="browseTea('white')" aria-label="Browse white teas"><span>White tea</span></button>
+
+        <div class="tea-steam" aria-hidden="true"><span></span><span></span><span></span></div>
+        <button class="taste-sign" onclick="showSection('detail')">
+          <small>At the center table</small>
+          <strong>Welcome—taste it</strong>
+          <span>Peach Black Tea →</span>
+        </button>
+
+        <div class="tea-doors" aria-hidden="true">
+          <div class="tea-door tea-door-left"></div>
+          <div class="tea-door tea-door-right"></div>
+        </div>
+        <button class="enter-teahouse" onclick="enterTeaHouse()">
+          <small>Teadrops Pop-Up</small>
+          <strong>Enter the tea house</strong>
+          <span>Click to slide the doors open</span>
+        </button>
+      </div>
+    </section>
   </section>
 
   <!-- ═══ OUR STORY ═══ -->
@@ -1259,8 +1587,30 @@
       populateShop(cat);
     }
 
+    function browseTea(cat) {
+      showSection('shop');
+      populateShop(cat);
+      document.querySelectorAll('.chip').forEach((chip) => {
+        chip.classList.toggle('active', chip.getAttribute('onclick').includes(`'${cat}'`));
+      });
+    }
+
+    function openPopUp() {
+      showSection('home', { preserveScroll: true });
+      document.querySelectorAll('.nav-link').forEach(l => l.classList.remove('active'));
+      document.querySelectorAll('.nav-link')[3].classList.add('active');
+      history.replaceState(null, '', '#pop-up');
+      requestAnimationFrame(() => {
+        document.getElementById('pop-up').scrollIntoView({ behavior: 'smooth', block: 'start' });
+      });
+    }
+
+    function enterTeaHouse() {
+      document.getElementById('teahouseRoom').classList.add('entered');
+    }
+
     // ─── Navigation ───
-    function showSection(name) {
+    function showSection(name, options = {}) {
       document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
       document.getElementById('section-' + name).classList.add('active');
       document.getElementById('siteNav').classList.toggle('is-home', name === 'home');
@@ -1269,7 +1619,12 @@
       if (map[name] !== undefined) document.querySelectorAll('.nav-link')[map[name]].classList.add('active');
       if (name === 'cart') renderCart();
       if (window.location.hash !== '#' + name) history.replaceState(null, '', '#' + name);
-      window.scrollTo({ top: 0, behavior: 'smooth' });
+      if (!options.preserveScroll) window.scrollTo({ top: 0, behavior: 'smooth' });
+      requestAnimationFrame(updateNavSurface);
+    }
+
+    function updateNavSurface() {
+      document.getElementById('siteNav').classList.toggle('scrolled', window.scrollY > 60);
     }
 
     // ─── Quantity ───
@@ -1393,9 +1748,20 @@
     populateShop('all');
     renderCart();
     const initialSection = window.location.hash.slice(1);
-    if (['home', 'shop', 'story', 'detail', 'cart'].includes(initialSection)) {
+    if (initialSection === 'pop-up' || initialSection === 'pop-up-open') {
+      showSection('home', { preserveScroll: true });
+      requestAnimationFrame(() => {
+        document.getElementById('pop-up').scrollIntoView({ block: 'start' });
+        if (initialSection === 'pop-up-open') enterTeaHouse();
+        document.querySelectorAll('.nav-link').forEach(l => l.classList.remove('active'));
+        document.querySelectorAll('.nav-link')[3].classList.add('active');
+        history.replaceState(null, '', '#' + initialSection);
+      });
+    } else if (['home', 'shop', 'story', 'detail', 'cart'].includes(initialSection)) {
       showSection(initialSection);
     }
+    window.addEventListener('scroll', updateNavSurface, { passive: true });
+    updateNavSurface();
 
     // ─── Homepage painted parallax ───
     const hero = document.querySelector('.hero');
@@ -1412,6 +1778,21 @@
       hero.addEventListener('pointerleave', () => {
         hero.style.setProperty('--hero-x', 0);
         hero.style.setProperty('--hero-y', 0);
+      });
+    }
+
+    const teahouseRoom = document.getElementById('teahouseRoom');
+    if (teahouseRoom && finePointer && !reducedMotion) {
+      teahouseRoom.addEventListener('pointermove', (event) => {
+        const bounds = teahouseRoom.getBoundingClientRect();
+        const x = ((event.clientX - bounds.left) / bounds.width - 0.5) * 2;
+        const y = ((event.clientY - bounds.top) / bounds.height - 0.5) * 2;
+        teahouseRoom.style.setProperty('--room-x', x.toFixed(3));
+        teahouseRoom.style.setProperty('--room-y', y.toFixed(3));
+      });
+      teahouseRoom.addEventListener('pointerleave', () => {
+        teahouseRoom.style.setProperty('--room-x', 0);
+        teahouseRoom.style.setProperty('--room-y', 0);
       });
     }
   </script>
